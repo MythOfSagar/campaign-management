@@ -5,7 +5,7 @@ A web application with user authentication, task management, and a feed section 
 
 ## Features  
 - **Authentication:** Register, login, forgot password  
-- **Task Management:** Add, drag & drop, and delete tasks (Pending, Completed, Done)  
+- **Task Management:** Add, Drag & Drop, and delete tasks (Pending, Completed, Done)  
 - **Feed:** Users can post images with captions (Cloudinary for storage)  
 
 ## Tech Stack  
