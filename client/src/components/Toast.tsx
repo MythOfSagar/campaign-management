@@ -80,6 +80,7 @@ const ToastContainer = styled.div<{ visible: boolean }>`
   gap: 10px;
   border-left: 4px solid;
   max-width: 300px;
+  z-index: 100000;
   animation: ${({ visible }) => (visible ? fadeIn : fadeOut)} 0.3s ease;
   opacity: ${({ visible }) => (visible ? 1 : 0)};
 `;
