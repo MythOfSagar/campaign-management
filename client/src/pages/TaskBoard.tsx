@@ -173,9 +173,7 @@ const TaskBoard: React.FC = () => {
                         <Draggable key={task.id} id={task.id}>
                           <Task>
                             <TaskTitle >{task.title}</TaskTitle>
-
                             <TaskDescription >{task.description}</TaskDescription>
-
                           </Task>
                         </Draggable>
                       </IndividualTask>

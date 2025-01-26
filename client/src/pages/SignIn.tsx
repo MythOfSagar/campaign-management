@@ -39,13 +39,13 @@ const SignIn = () => {
     <Container>
       <FormWrapper>
         <Title>Sign In</Title>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={(event)=>handleSubmit(event)}>
           <Input
             type="text"
             name="userId"
             placeholder="Email or User Name"
             value={formData.userId}
-            onChange={handleChange}
+            onChange={(event)=>handleChange(event)}
             required
           />
           <Input
@@ -53,7 +53,7 @@ const SignIn = () => {
             name="password"
             placeholder="Password"
             value={formData.password}
-            onChange={handleChange}
+            onChange={(event)=>handleChange(event)}
             required
           />
           <SubmitButton type="submit">Sign In</SubmitButton>

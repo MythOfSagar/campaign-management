@@ -40,13 +40,13 @@ const ResetPassword = () => {
     <Container>
       <FormWrapper>
         <Title>Reset Password</Title>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={(event)=>handleSubmit(event)}>
           <Input
             type="text"
             name="userId"
             placeholder="Email or User Name"
             value={formData.userId}
-            onChange={handleChange}
+            onChange={(event)=>handleChange(event)}
             required
           />
           <Input
@@ -54,7 +54,7 @@ const ResetPassword = () => {
             name="password"
             placeholder="New Password"
             value={formData.password}
-            onChange={handleChange}
+            onChange={(event)=>handleChange(event)}
             required
           />
           <SubmitButton type="submit">Reset Password</SubmitButton>

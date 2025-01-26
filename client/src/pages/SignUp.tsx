@@ -34,13 +34,13 @@ const SignUp = () => {
     <Container>
       <FormWrapper>
         <Title>Create an Account</Title>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={(event)=>handleSubmit(event)}>
           <Input
             type="text"
             name="userName"
             placeholder="User Name"
             value={formData.userName}
-            onChange={handleChange}
+            onChange={(event)=>handleChange(event)}
             required
           />
           <Input
@@ -48,7 +48,7 @@ const SignUp = () => {
             name="email"
             placeholder="Email"
             value={formData.email}
-            onChange={handleChange}
+            onChange={(event)=>handleChange(event)}
             required
           />
           <Input
@@ -56,7 +56,7 @@ const SignUp = () => {
             name="password"
             placeholder="Password"
             value={formData.password}
-            onChange={handleChange}
+            onChange={(event)=>handleChange(event)}
             required
           />
           <SubmitButton type="submit">Sign Up</SubmitButton>

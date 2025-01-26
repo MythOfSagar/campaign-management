@@ -12,10 +12,7 @@ import { signOut } from '../redux/Authorize/action.ts';
 import { ROUTES } from '../constants.ts';
 
 
-interface SidebarProps {
-}
-
-const Sidebar: React.FC<SidebarProps> = () => {
+const Sidebar= () => {
 
     const location = useLocation();
 
