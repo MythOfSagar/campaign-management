@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import {ThreeDots} from 'react-loader-spinner'
+// import {ThreeDots} from 'react-loader-spinner'
 
 const Loader = () => {
     return (
       <LoaderContainer>
-      <ThreeDots
+      {/* <ThreeDots
       visible={true}
       height="80"
       width="80"
@@ -14,7 +14,7 @@ const Loader = () => {
       ariaLabel="three-dots-loading"
       wrapperStyle={{}}
       wrapperClass=""
-      />
+      /> */}
       </LoaderContainer>
     );
 };
