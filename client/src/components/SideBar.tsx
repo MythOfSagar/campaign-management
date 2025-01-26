@@ -1,10 +1,75 @@
 import React, { useEffect, useState } from 'react';
+
 import styled from 'styled-components';
-import { FaTasks, FaBullhorn } from 'react-icons/fa'; // Icons for Tasks and Campaigns
+
+import { FaTasks, FaBullhorn } from 'react-icons/fa'; 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CiLogout } from "react-icons/ci";
+
 import { useDispatch } from 'react-redux';
+
 import { signOut } from '../redux/Authorize/action.ts';
+import { ROUTES } from '../constants.ts';
+
+
+interface SidebarProps {
+}
+
+const Sidebar: React.FC<SidebarProps> = () => {
+
+    const location = useLocation();
+
+    const [activePage, setActivePage] = useState<string>('')
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        setActivePage(location.pathname.split('/')[1])
+    }, [location])
+
+
+    return (
+        <SidebarContainer>
+            <div></div>
+            <IconsContainer>
+                <MenuItem
+                    active={activePage === 'tasks'}
+                    onClick={() => navigate(ROUTES.TASK)}
+                    title="Tasks"
+                >
+                    <IconWrapper>
+                        <FaTasks />
+                    </IconWrapper>
+                </MenuItem>
+
+                <MenuItem
+                    active={activePage === 'campaigns'}
+                    onClick={() => navigate(ROUTES.CAMPAIGNS)}
+                    title="Campaigns"
+                >
+                    <IconWrapper>
+                        <FaBullhorn />
+                    </IconWrapper>
+                </MenuItem>
+            </IconsContainer>
+            <IconsContainer>
+                <MenuItem
+                    onClick={() => {dispatch(signOut());navigate(ROUTES.SIGN_IN)}}
+                    title="Tasks"
+                >
+                    <IconWrapper>
+                        <CiLogout />
+                    </IconWrapper>
+                </MenuItem>
+            </IconsContainer>
+
+
+        </SidebarContainer>
+    );
+};
+
+export default Sidebar;
 
 const IconsContainer = styled.div`
    background-color: #ffffff;
@@ -48,68 +113,3 @@ const MenuItem = styled.div<{ active?: boolean }>`
 const IconWrapper = styled.div`
   font-size: 24px;
 `;
-
-const Label = styled.span`
-  font-size: 12px;
-  color: #555;
-`;
-
-// Sidebar Component
-interface SidebarProps {
-}
-
-const Sidebar: React.FC<SidebarProps> = () => {
-
-    const location = useLocation();
-
-    const [activePage, setActivePage] = useState<string>('')
-
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        setActivePage(location.pathname.split('/')[1])
-    }, [location])
-
-
-    return (
-        <SidebarContainer>
-            <div></div>
-            <IconsContainer>
-                <MenuItem
-                    active={activePage === 'tasks'}
-                    onClick={() => navigate('/tasks')}
-                    title="Tasks"
-                >
-                    <IconWrapper>
-                        <FaTasks />
-                    </IconWrapper>
-                </MenuItem>
-
-                <MenuItem
-                    active={activePage === 'campaigns'}
-                    onClick={() => navigate('/campaigns')}
-                    title="Campaigns"
-                >
-                    <IconWrapper>
-                        <FaBullhorn />
-                    </IconWrapper>
-                </MenuItem>
-            </IconsContainer>
-            <IconsContainer>
-                <MenuItem
-                    onClick={() => {dispatch(signOut());navigate('/singIn')}}
-                    title="Tasks"
-                >
-                    <IconWrapper>
-                        <CiLogout />
-                    </IconWrapper>
-                </MenuItem>
-            </IconsContainer>
-
-
-        </SidebarContainer>
-    );
-};
-
-export default Sidebar;

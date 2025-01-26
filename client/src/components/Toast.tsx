@@ -1,14 +1,49 @@
 import React, { useState, useEffect } from 'react';
+
 import styled, { keyframes } from 'styled-components';
+
+import { AiOutlineCheckCircle, AiOutlineInfoCircle, AiOutlineCloseCircle } from 'react-icons/ai';
 
 type ToastStatus = 'success' | 'info' | 'error';
 
-interface ToastProps {
-  status: ToastStatus;
-  message: string;
-  duration?: number; // Duration in milliseconds
-  onClose?: () => void;
-}
+
+const Toast = ({ status, message, duration = 3000, onClose }) => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setVisible(true);
+
+    const timer = setTimeout(() => {
+      setVisible(false);
+      if (onClose) {
+        setTimeout(onClose, 300); 
+      }
+    }, duration);
+
+    return () => clearTimeout(timer);
+  }, [duration, onClose]);
+
+  const statusIcons = {
+    success: <AiOutlineCheckCircle />,
+    info: <AiOutlineInfoCircle />,
+    error: <AiOutlineCloseCircle />,
+  };
+
+  const borderColor = {
+    success: '#28a745',
+    info: '#007bff',
+    error: '#dc3545',
+  };
+
+  return (
+    <ToastContainer visible={visible} style={{ borderColor: borderColor[status] }}>
+      <IconWrapper status={status}>{statusIcons[status]}</IconWrapper>
+      <Message>{message}</Message>
+    </ToastContainer>
+  );
+};
+
+export default Toast;
 
 const fadeIn = keyframes`
   from {
@@ -59,41 +94,3 @@ const Message = styled.span`
   font-size: 14px;
   color: #333;
 `;
-
-const Toast: React.FC<ToastProps> = ({ status, message, duration = 3000, onClose }) => {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    setVisible(true);
-
-    const timer = setTimeout(() => {
-      setVisible(false);
-      if (onClose) {
-        setTimeout(onClose, 300); // Wait for fade-out animation to complete
-      }
-    }, duration);
-
-    return () => clearTimeout(timer);
-  }, [duration, onClose]);
-
-  const statusIcons: { [key in ToastStatus]: string } = {
-    success: '✔️',
-    info: 'ℹ️',
-    error: '❌',
-  };
-
-  const borderColor = {
-    success: '#28a745',
-    info: '#007bff',
-    error: '#dc3545',
-  };
-
-  return (
-    <ToastContainer visible={visible} style={{ borderColor: borderColor[status] }}>
-      <IconWrapper status={status}>{statusIcons[status]}</IconWrapper>
-      <Message>{message}</Message>
-    </ToastContainer>
-  );
-};
-
-export default Toast;

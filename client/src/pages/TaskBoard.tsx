@@ -15,18 +15,16 @@ import Draggable from "../components/Draggable.tsx";
 import Droppable from "../components/Droppable.tsx";
 import { RESOURCES_TYPES } from "../constants.ts";
 
-// Task interface
-interface Task {
+interface ITask {
   id: string;
   title: string;
   description: string;
 }
 
-// Column interface
-interface Column {
+interface IColumn {
   id: string;
   title: string;
-  tasks: Task[];
+  tasks: ITask[];
 }
 
 
@@ -46,7 +44,7 @@ const TaskBoard: React.FC = () => {
     description: ''
   });
 
-  const [tasksByStatus, setTasksByStatus] = useState<Column[]>([]);
+  const [tasksByStatus, setTasksByStatus] = useState<IColumn[]>([]);
 
 
   useEffect(() => {
@@ -280,11 +278,6 @@ const TaskDescription = styled.span`
   color: #555;
   margin-top: 5px;
 `;
-
-
-
-
-
 
 const DeleteModal = styled.div`
   position: fixed;
