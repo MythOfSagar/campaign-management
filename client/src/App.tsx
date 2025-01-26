@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Allroutes from './pages/AllRoutes.tsx';
+import { useSelector } from 'react-redux';
+import Loader from './components/Loader.tsx';
+import Toast from './components/Toast.tsx';
+import Sidebar from './components/SideBar.tsx';
 
 function App() {
+  const isLoading = !!useSelector((state: any) => state?.notification?.isLoading);
+  const isLogedIn = !!useSelector((state: any) => state?.auth?.loginData?.token);
+
+  const notificationData = useSelector((state: any) => state?.notification);
+  
+  const [showToast, setShowToast] = useState<boolean>(false)
+
+  useEffect(() => {
+    notificationData.triggerNumber && setShowToast(true)
+  }, [notificationData.triggerNumber])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isLogedIn && <Sidebar />}
+      {isLoading && <Loader />}
+      {showToast && notificationData.status && <Toast
+        status={notificationData.status}
+        message={notificationData.message}
+        duration={2000}
+        onClose={() => setShowToast(false)}
+      />}
+
+      <Allroutes />
     </div>
   );
 }
