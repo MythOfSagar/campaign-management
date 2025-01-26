@@ -24,7 +24,7 @@ function App() {
       {showToast && notificationData.status && <Toast
         status={notificationData.status}
         message={notificationData.message}
-        duration={2000}
+        duration={3000}
         onClose={() => setShowToast(false)}
       />}
 
